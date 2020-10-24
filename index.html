@@ -100,9 +100,9 @@
     <a-box scale="1 6 1" position="-2.5 3 0" color="cyan"></a-box>
     <a-box scale="1 6 1" position="2.5 3 0" color="cyan"></a-box>
     <a-box scale="6 1 1" position="0 6.5 0" color="cyan"></a-box>-->
-    <a-entity scale="0.05 0.05 0.05" position="0 2 0" gltf-model="#portalring"></a-entity>
+    <a-entity scale="0.05 0.05 0.05" position="0 2.7 0" gltf-model="#portalring"></a-entity>
 
-    <a-entity scale="0.05 0.05 0.05" position="0 2 0" rotation="90 0 0" gltf-model="#hideglb"></a-entity>
+
     <!-- Hider walls -->
     <a-entity id="hider-walls">
       <a-box scale="6 100 1" position="0 57 0" hider-material></a-box>
@@ -113,7 +113,7 @@
       <a-box scale="200 1 199" position="0 -0.5 100" hider-material></a-box>
       <a-box scale="1 100 200" position="-100 50 100" hider-material></a-box>
       <a-box scale="1 100 200" position="100 50 100" hider-material></a-box>
-
+      <a-ring hider-material radius-inner="3" radius-outer="50" position="0 3 0"></a-ring>
     </a-entity>
 
     <a-entity id="portal-wall">
@@ -134,16 +134,19 @@
     <a-entity id="portal-world">
       <a-box scale="200 1 100" position="0 -0.5 49.5" color="blue"></a-box>
     </a-entity>
-    <a-sphere color="yellow" radius="0.5" position="-2 0.5 1"></a-sphere>
-    <a-sphere color="red" radius="0.5" position="-2 2 1"></a-sphere>
-    <a-sphere color="blue" radius="0.5" position="-2 3.5 1"></a-sphere>
-    <a-sphere color="green" radius="0.5" position="-2 5 1"></a-sphere>
+    <a-sphere color="yellow" radius="0.5" position="-3 0.5 1"></a-sphere>
+    <!--<a-sphere color="red" radius="0.5" position="-3 2 1"></a-sphere>
+    <a-sphere color="blue" radius="0.5" position="-3 3.5 1"></a-sphere>
+    <a-sphere color="green" radius="0.5" position="-3 5 1"></a-sphere>-->
 
   </a-scene>
   <script>
     const video = document.getElementById('video')
     video.play()
-
+    // `collide` event emitted by a component such as some collider or physics component.
+    document.querySelector('a-sphere').addEventListener('click', function (evt) {
+      console.log('This A-Frame entity collided with another entity!');
+    });
   </script>
 </body>
 
