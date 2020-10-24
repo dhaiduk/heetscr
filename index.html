@@ -72,36 +72,37 @@
     <a-assets>
       <!-- Credit to Poly by Google for the model: https://poly.google.com/view/0fVRHo65E-j -->
       <a-asset-item id="unicornModel" src="unicorn.glb"></a-asset-item>
-      <video id="video1" muted autoplay loop crossorigin="anonymous">
+      <a-asset-item id="portalring" src="portalring.glb"></a-asset-item>
+
+      <video id="video" muted autoplay loop crossorigin="anonymous">
         <!--<source src="city.mp4">-->
         <source src="APRICITY_.mp4">
         </source>
       </video>
-      <video id="video2" muted autoplay loop crossorigin="anonymous">
-        <!--<source src="city.mp4">-->
+      <!--<video id="video2" muted autoplay loop crossorigin="anonymous">
         <source src="GLAZE_.mp4">
         </source>
       </video>
       <video id="video3" muted autoplay loop crossorigin="anonymous">
-        <!--<source src="city.mp4">-->
         <source src="NOOR_.mp4">
         </source>
       </video>
       <video id="video4" muted autoplay loop crossorigin="anonymous">
-        <!--<source src="city.mp4">-->
         <source src="YUGEN_.mp4">
         </source>
-      </video>
+      </video>-->
     </a-assets>
 
     <a-camera id="camera" position="0 5 8">
     </a-camera>
 
-    <!-- Doorway -->
+    <!-- Doorway 
     <a-box scale="1 6 1" position="-2.5 3 0" color="cyan"></a-box>
     <a-box scale="1 6 1" position="2.5 3 0" color="cyan"></a-box>
-    <a-box scale="6 1 1" position="0 6.5 0" color="cyan"></a-box>
+    <a-box scale="6 1 1" position="0 6.5 0" color="cyan"></a-box>-->
+    <a-entity scale="0.05 0.05 0.05" position="0 2 0" gltf-model="#portalring"></a-entity>
 
+    <a-entity scale="0.05 0.05 0.05" position="0 2 0" rotation="90 0 0" gltf-model="#hideglb"></a-entity>
     <!-- Hider walls -->
     <a-entity id="hider-walls">
       <a-box scale="6 100 1" position="0 57 0" hider-material></a-box>
@@ -112,6 +113,7 @@
       <a-box scale="200 1 199" position="0 -0.5 100" hider-material></a-box>
       <a-box scale="1 100 200" position="-100 50 100" hider-material></a-box>
       <a-box scale="1 100 200" position="100 50 100" hider-material></a-box>
+
     </a-entity>
 
     <a-entity id="portal-wall">
@@ -120,7 +122,7 @@
 
     <a-entity id="portal-contents">
       <a-entity scale="0.3 0.3 0.3" position="0 0 -7" gltf-model="#unicornModel"></a-entity>
-      <a-sky rotation="0 0 0" src="#video1"></a-sky>
+      <a-sky rotation="0 0 0" src="#video"></a-sky>
       <!--<a-box
           scale="200 1 100"
           position="0 -0.5 -49.5"
@@ -132,9 +134,14 @@
     <a-entity id="portal-world">
       <a-box scale="200 1 100" position="0 -0.5 49.5" color="blue"></a-box>
     </a-entity>
+    <a-sphere color="yellow" radius="0.5" position="-2 0.5 1"></a-sphere>
+    <a-sphere color="red" radius="0.5" position="-2 2 1"></a-sphere>
+    <a-sphere color="blue" radius="0.5" position="-2 3.5 1"></a-sphere>
+    <a-sphere color="green" radius="0.5" position="-2 5 1"></a-sphere>
+
   </a-scene>
   <script>
-    const video = document.getElementById('video1')
+    const video = document.getElementById('video')
     video.play()
 
   </script>

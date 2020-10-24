@@ -4,3 +4,97 @@ Video: MPEG4 Video (H264) 3168x1584 30fps 4526kbps [V: h264 high L5.0, yuv420p, 
 
 Video: MPEG4 Video (H264) 4096x2048 29.97fps 13901kbps [V: Mainconcept Video Media Handler [eng] (h264 main L5.1, yuv420p, 4096x2048, 13901 kb/s)]
 Audio: AAC 48000Hz stereo 317kbps [A: #Mainconcept MP4 Sound Media Handler [eng] (aac lc, 48000 Hz, stereo, 317 kb/s)]
+
+
+
+<!doctype HTML>
+<html>
+
+<head>
+  <title>AR</title>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.0.1/dist/aframe-extras.min.js"></script>
+  <script
+    src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+  <a-scene embedded arjs="debugUIEnabled: false;" renderer="antialias: true; 
+  colorManagement: true; 
+  sortObjects: true; 
+  physicallyCorrectLights: true; 
+  maxCanvasWidth: 1920; 
+  maxCanvasHeight: 1920;
+  precision: high;" loading-screen="dotsColor: blue; backgroundColor: blue" vr-mode-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="santa_id" src="models/santa_final.gltf" preload="auto"></a-asset-item>
+      <audio id="santasound1" src="sound/santa_ingaclub_01.mp3" preload="auto"></audio>
+      <audio id="santasound2" src="sound/santa_ingaclub_02.mp3" preload="auto"></audio>
+      <audio id="santasound3" src="sound/santa_ingaclub_03.mp3" preload="auto"></audio>
+      <audio id="santasound4" src="sound/santa_ingaclub_04.mp3" preload="auto"></audio>
+      <audio id="santasound5" src="sound/santa_ingaclub_05.mp3" preload="auto"></audio>
+      <audio id="jingle_bells" src="sound/jingle-bells.mp3" preload="auto"></audio>
+      <audio id="magic" src="sound/magic.mp3" preload="auto"></audio>
+    </a-assets>
+    <a-entity id="snow" position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000; size: 3"
+      visible="false"></a-entity>
+    <a-marker type="pattern" preset="custom" url="data/new2.patt">
+      <a-gltf-model src="#santa_id" scale="1 1 1" position="0 0.3 0" rotation="-90 0 00"
+        animation-mixer="loop: pingpong; timeScale: 1.5">
+      </a-gltf-model>
+      <a-entity sound="src: #santasound1; volume: 10;"></a-entity>
+      <a-entity sound="src: #santasound2; volume: 10;"></a-entity>
+      <a-entity sound="src: #santasound3; volume: 10;"></a-entity>
+      <a-entity sound="src: #santasound4; volume: 10;"></a-entity>
+      <a-entity sound="src: #santasound5; volume: 10;"></a-entity>
+      <a-entity sound="src: #jingle_bells; volume: 0.3;"></a-entity>
+      <a-entity sound="src: #magic;"></a-entity>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+  <script>
+    var curentNumber;//curent number santasound track
+    var RandomNamber = () => Math.floor(Math.random() * 5);//generate random namber from interval 0 to 4
+    var santaIdDOM = document.getElementById("santa_id");//get DOM santa 3D model
+    var snowIdDOM = document.getElementById("snow");//get DOM santa 3D model
+    var aMarkerDOM = document.querySelector("a-marker");//get DOM marker
+    var aGltfModelDOM = document.querySelector("a-gltf-model");//get DOM 3D model
+    var timer;
+    var allSounds = document.querySelectorAll('[sound]');
+
+    santaIdDOM.addEventListener("loaded", (e) => { //event load 3D model
+      console.log("Santa model loaded");
+    });
+
+    aMarkerDOM.addEventListener("markerFound", (e) => { //event markerFound
+      console.log("Marker found");
+      aGltfModelDOM.setAttribute('visible', true)
+      snowIdDOM.setAttribute('visible', true)
+      curentNumber = RandomNamber();
+      allSounds[curentNumber].components.sound.playSound();
+      allSounds[5].components.sound.playSound();
+      allSounds[6].components.sound.playSound();
+      timer = setTimeout(() => {
+        aGltfModelDOM.setAttribute('visible', false);
+        allSounds[6].components.sound.playSound();
+        snowIdDOM.setAttribute('visible', false);
+      }, 11000);
+    });
+
+    aMarkerDOM.addEventListener("markerLost", (e) => {//event markerLost
+      console.log("Marker lost");
+      allSounds[curentNumber].components.sound.stopSound();
+      allSounds[6].components.sound.playSound();
+      snowIdDOM.setAttribute('visible', false);
+      clearTimeout(timer)
+    });
+
+  </script>
+
+</body>
+
+</html>
