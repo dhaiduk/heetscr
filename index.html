@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>8th Wall Web: Portal</title>
-
+  <link rel="stylesheet" type="text/css" href="index.css">
   <!-- We've included a slightly modified version of A-Frame, which fixes some polish concerns -->
   <script src="//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js"></script>
 
@@ -60,13 +60,32 @@
         this.wasOutside = isOutside
       }
     })
+    AFRAME.registerComponent('next-button', {
+      init: function () {
 
+        const animationList = ["idle", "pockets", "hiphop", "chicken"]
+
+        const sky = document.querySelector('a-sky')
+        const nextButton = document.getElementById('nextbutton')
+
+        let idx = 1 // Start with the 2nd animation because the model starts with idle animation
+        const nextAnimation = () => {
+      
+          console.log("nextAnimation")
+          sky.setAttribute('src', 'video2')
+          //idx = (idx + 1) % animationList.length
+        }
+
+        nextButton.onclick = nextAnimation // Switch to the next animation when the button is pressed.
+      }
+    })
   </script>
 
 </head>
 
 <body>
-  <a-scene portal xrextras-almost-there xrextras-loading xrextras-runtime-error xrextras-tap-recenter xrweb>
+  <div class="nextbutton" id="nextbutton">Next &gt;</div>
+  <a-scene portal xrextras-almost-there xrextras-loading xrextras-runtime-error xrextras-tap-recenter xrweb next-button>
 
     <!-- We can define assets here to be loaded when A-Frame initializes -->
     <a-assets>
@@ -74,23 +93,23 @@
       <a-asset-item id="unicornModel" src="unicorn.glb"></a-asset-item>
       <a-asset-item id="portalring" src="portalring.glb"></a-asset-item>
 
-      <video id="video" muted autoplay loop crossorigin="anonymous">
+      <video id="video1" muted  loop crossorigin="anonymous">
         <!--<source src="city.mp4">-->
         <source src="APRICITY_.mp4">
         </source>
       </video>
-      <!--<video id="video2" muted autoplay loop crossorigin="anonymous">
+      <video id="video2" muted  loop crossorigin="anonymous">
         <source src="GLAZE_.mp4">
         </source>
       </video>
-      <video id="video3" muted autoplay loop crossorigin="anonymous">
+      <video id="video3" muted  loop crossorigin="anonymous">
         <source src="NOOR_.mp4">
         </source>
       </video>
-      <video id="video4" muted autoplay loop crossorigin="anonymous">
+      <video id="video4" muted  loop crossorigin="anonymous">
         <source src="YUGEN_.mp4">
         </source>
-      </video>-->
+      </video>
     </a-assets>
 
     <a-camera id="camera" position="0 5 8">
@@ -122,7 +141,10 @@
 
     <a-entity id="portal-contents">
       <a-entity scale="0.3 0.3 0.3" position="0 0 -7" gltf-model="#unicornModel"></a-entity>
-      <a-sky rotation="0 0 0" src="#video"></a-sky>
+      <a-sky rotation="0 0 0" src="#video1"></a-sky>
+      <a-sky rotation="0 0 0" src="#video2" visible="false"></a-sky>
+      <a-sky rotation="0 0 0" src="#video3" visible="false"></a-sky>
+      <a-sky rotation="0 0 0" src="#video4" visible="false"></a-sky>
       <!--<a-box
           scale="200 1 100"
           position="0 -0.5 -49.5"
@@ -141,12 +163,9 @@
 
   </a-scene>
   <script>
-    const video = document.getElementById('video')
+    const video = document.getElementById('video1')
     video.play()
-    // `collide` event emitted by a component such as some collider or physics component.
-    document.querySelector('a-sphere').addEventListener('click', function (evt) {
-      console.log('This A-Frame entity collided with another entity!');
-    });
+    console.log("nextAnimation");
   </script>
 </body>
 
