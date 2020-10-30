@@ -63,7 +63,7 @@
     var starttime = 1;  // start at 0 seconds
     var endtime = 3;    // stop at 1 seconds
 
-   
+
     AFRAME.registerComponent('next-button1', {
       init: function () {
         var video = document.getElementById('video');
@@ -90,31 +90,30 @@
     })
     AFRAME.registerComponent('next-button2', {
       init: function () {
-        var video = document.getElementById('video');
         const nextButton2 = document.getElementById('nextbutton2')
         const nextButton2Click = () => {
+          video.pause();
           starttime = 5;
           endtime = 6;
+          video.play();
         }
-
-        video.play();
-        video.addEventListener('loadedmetadata', function () {
-          video.currentTime = starttime;
-        }, false);
-
-        video.addEventListener("timeupdate", function () {
-          if (video.currentTime >= endtime) {
-            video.currentTime = starttime;
-            video.play();
-          }
-        }, false);
-
         nextButton2.onclick = nextButton2Click;
       }
+
     })
 
+   /* AFRAME.registerComponent('next-button3', {
+      init: function () {
+        const nextButton3 = document.getElementById('nextbutton3')
+        const nextButton3Click = () => {
+          starttime = 9;
+          endtime = 10;
+        }
+        nextButton3.onclick = nextButton3Click;
+      }
 
-    
+    })*/
+
   </script>
 
 </head>
@@ -126,7 +125,7 @@
   <div class="nextbutton4" id="nextbutton2">4 &gt;</div>
 
   <a-scene portal xrextras-almost-there xrextras-loading xrextras-runtime-error xrextras-tap-recenter xrweb next-button1
-    next-button2>
+    next-button2 next-button3>
 
     <!-- We can define assets here to be loaded when A-Frame initializes -->
     <a-assets>
