@@ -70,11 +70,30 @@
 
         let idx = 1 // Start with the 2nd animation because the model starts with idle animation
         const nextAnimation = () => {
-      
+
           console.log("nextAnimation")
           sky.setAttribute('src', 'video2')
           //idx = (idx + 1) % animationList.length
         }
+
+
+        var starttime = 0;  // start at 7 seconds
+        var endtime = 1;    // stop at 17 seconds
+
+        var video = document.getElementById('video1');
+        video.play();
+        video.addEventListener('loadedmetadata', function () {
+          video.currentTime = starttime;
+        }, false);
+
+        video.addEventListener("timeupdate", function () {
+          console.log(video.currentTime);
+          if (video.currentTime >= endtime) {
+            console.log(video.currentTime)
+            video.currentTime = starttime;
+            video.play();
+          }
+        }, false);
 
         nextButton.onclick = nextAnimation // Switch to the next animation when the button is pressed.
       }
@@ -92,24 +111,28 @@
       <!-- Credit to Poly by Google for the model: https://poly.google.com/view/0fVRHo65E-j -->
       <a-asset-item id="unicornModel" src="unicorn.glb"></a-asset-item>
       <a-asset-item id="portalring" src="portalring.glb"></a-asset-item>
-
-      <video id="video1" muted  loop crossorigin="anonymous">
+      <video id="video1" muted crossorigin="anonymous">
         <!--<source src="city.mp4">-->
-        <source src="APRICITY_.mp4">
+        <source src="allvideo.mp4">
         </source>
       </video>
-      <video id="video2" muted  loop crossorigin="anonymous">
+      <!--<video id="video1" muted  loop crossorigin="anonymous">
+        <!--<source src="city.mp4">-->
+      <source src="APRICITY_.mp4">
+      </source>
+      </video>
+      <video id="video2" muted loop crossorigin="anonymous">
         <source src="GLAZE_.mp4">
         </source>
       </video>
-      <video id="video3" muted  loop crossorigin="anonymous">
+      <video id="video3" muted loop crossorigin="anonymous">
         <source src="NOOR_.mp4">
         </source>
       </video>
-      <video id="video4" muted  loop crossorigin="anonymous">
+      <video id="video4" muted loop crossorigin="anonymous">
         <source src="YUGEN_.mp4">
         </source>
-      </video>
+      </video>-->
     </a-assets>
 
     <a-camera id="camera" position="0 5 8">
@@ -142,10 +165,10 @@
     <a-entity id="portal-contents">
       <a-entity scale="0.3 0.3 0.3" position="0 0 -7" gltf-model="#unicornModel"></a-entity>
       <a-sky rotation="0 0 0" src="#video1"></a-sky>
-      <a-sky rotation="0 0 0" src="#video2" visible="false"></a-sky>
+      <!--<a-<a-sky rotation="0 0 0" src="#video2" visible="false"></a-sky>
       <a-sky rotation="0 0 0" src="#video3" visible="false"></a-sky>
       <a-sky rotation="0 0 0" src="#video4" visible="false"></a-sky>
-      <!--<a-box
+      box
           scale="200 1 100"
           position="0 -0.5 -49.5"
           color="blue"></a-box>
@@ -162,11 +185,6 @@
     <a-sphere color="green" radius="0.5" position="-3 5 1"></a-sphere>-->
 
   </a-scene>
-  <script>
-    const video = document.getElementById('video1')
-    video.play()
-    console.log("nextAnimation");
-  </script>
 </body>
 
 </html>
