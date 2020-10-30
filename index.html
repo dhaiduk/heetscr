@@ -62,7 +62,7 @@
     })
     var starttime = 1;  // start at 0 seconds
     var endtime = 3;    // stop at 1 seconds
-
+    var timeUpdate
 
     AFRAME.registerComponent('next-button1', {
       init: function () {
@@ -78,7 +78,7 @@
           video.currentTime = starttime;
         }, false);
 
-        video.addEventListener("timeupdate", function () {
+        timeUpdate = video.addEventListener("timeupdate", function () {
           if (video.currentTime >= endtime) {
             video.currentTime = starttime;
             video.play();
@@ -94,6 +94,7 @@
         const nextButton2Click = () => {
           video.pause();
           starttime = 5;
+          video.currentTime = starttime;
           endtime = 6;
           video.play();
         }
@@ -102,17 +103,34 @@
 
     })
 
-   /* AFRAME.registerComponent('next-button3', {
+    AFRAME.registerComponent('next-button3', {
       init: function () {
         const nextButton3 = document.getElementById('nextbutton3')
         const nextButton3Click = () => {
+          video.pause();
           starttime = 9;
+          video.currentTime = starttime;
           endtime = 10;
+          video.play();
         }
         nextButton3.onclick = nextButton3Click;
       }
+    })
 
-    })*/
+
+    AFRAME.registerComponent('next-button4', {
+      init: function () {
+        const nextButton4 = document.getElementById('nextbutton4')
+        const nextButton4Click = () => {
+          video.pause();
+          starttime = 13;
+          video.currentTime = starttime;
+          endtime = 14;
+          video.play();
+        }
+        nextButton4.onclick = nextButton4Click;
+      }
+    })
 
   </script>
 
@@ -121,11 +139,11 @@
 <body>
   <div class="nextbutton1" id="nextbutton1">1 &gt;</div>
   <div class="nextbutton2" id="nextbutton2">2 &gt;</div>
-  <div class="nextbutton3" id="nextbutton1">3 &gt;</div>
-  <div class="nextbutton4" id="nextbutton2">4 &gt;</div>
+  <div class="nextbutton3" id="nextbutton3">3 &gt;</div>
+  <div class="nextbutton4" id="nextbutton4">4 &gt;</div>
 
   <a-scene portal xrextras-almost-there xrextras-loading xrextras-runtime-error xrextras-tap-recenter xrweb next-button1
-    next-button2 next-button3>
+    next-button2 next-button3 next-button4>
 
     <!-- We can define assets here to be loaded when A-Frame initializes -->
     <a-assets>
