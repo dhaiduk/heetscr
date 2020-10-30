@@ -1,11 +1,53 @@
-div.nextbutton {
+div.nextbutton1 {
   z-index: 10;
-  width: 33%;
-  height: 10%;
+  width: 20%;
+  height: 5%;
   position: absolute;
-  top: 10px;
+  top: 5%;
   left: 10px;
   background-color: #7611B7;
+  text-align: center;
+  color: #FFFFFF;
+  vertical-align: middle;
+  user-select: none;
+}
+div.nextbutton2 {
+  z-index: 10;
+  width: 20%;
+  height: 5%;
+  position: absolute;
+  top: 15%;
+  left: 10px;
+  background-color: #b71177;
+  text-align: center;
+  color: #FFFFFF;
+  vertical-align: middle;
+  user-select: none;
+}
+
+div.nextbutton3 {
+  z-index: 10;
+  width: 20%;
+  height: 5%;
+  position: absolute;
+  top: 25%;
+  left: 10px;
+  background-color: #17b711;
+  text-align: center;
+  color: #FFFFFF;
+  vertical-align: middle;
+  user-select: none;
+}
+
+
+div.nextbutton4 {
+  z-index: 10;
+  width: 20%;
+  height: 5%;
+  position: absolute;
+  top: 35%;
+  left: 10px;
+  background-color: #38b711;
   text-align: center;
   color: #FFFFFF;
   vertical-align: middle;
